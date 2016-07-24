@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
 import urllib
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -140,7 +141,7 @@ USE_TZ = True
 # Register database schemes in URLs.
 urllib.parse.uses_netloc.append('mysql')
 
-try
+try:
 
     # Check to make sure DATABASES is set in settings.py file.
     # If not default to {}
