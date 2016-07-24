@@ -1,0 +1,77 @@
+{%  extends 'base.html' %}
+
+{% block title %}Jobs Detail{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="panel panel-default " >
+            <div class="panel-heading">Job Info:</div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Job ID:
+                    {{ job.job_id }}
+                </div>
+                <div class="col-sm-4">
+                    Client ID:
+                    {{ client.clientid }}
+                </div>
+                <div class="col-sm-4">
+                    Client Name:
+                    {{ client.first_name }} {{ client.last_name }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    Job Name:
+                    {{ job.job_name }}
+                </div>
+                <div class="col-sm-4">
+                    Company:
+                    {{ client.company }}
+                </div>
+                <div class="col-sm-4">
+                    Work Phone:
+                    {{ client.work_phone }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    {{ job.job_status }}
+                </div>
+                <div class="col-sm-4">
+                    Submitted Date:
+                    {{ job.date_submitted }}
+                </div>
+                <div class="col-sm-4">
+                    Completed Date:
+                    {{ job.date_completed }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Procedures:</div>
+
+            <!--procedure content-->
+            <div class="table-boardered">
+            <ul>
+                {% for procedure in procedures %}
+                <li>
+                    {{ procedure.indented_name }}
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

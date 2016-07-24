@@ -1,0 +1,25 @@
+
+{%  extends 'base.html' %}
+
+{% block title %}Clients{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered table-condensed table-striped table-hover" style="width:60%">
+        <tr class="table-row">
+            <td>ClientID</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td></td>
+        </tr>
+        {% for client in clients %}
+        <tr class="table-row">
+            <td>{{ client.pk }}</td>
+            <td>{{ client.first_name }}</td>
+            <td>{{ client.last_name }}</td>
+            <td><a href="{% url 'clients:detail' client.pk %}" class="btn-sm btn-default">View</a> <a href="{% url 'clients:client-update' client.pk %}" class="btn-sm btn-default">Update</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

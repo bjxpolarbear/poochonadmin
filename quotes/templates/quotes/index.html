@@ -1,0 +1,27 @@
+
+{%  extends 'base.html' %}
+
+{% block title %}Quotes{% endblock %}
+
+{% block body %}
+
+{#    <a href="create/" class="btn btn-default col-sm-offset-10  ">New Quote</a>#}
+
+    <table class="table table-bordered table-condensed table-striped table-hover" style="width:60%">
+        <tr>
+            <td>Quote ID</td>
+            <td>Client</td>
+            <td>Name</td>
+        </tr>
+        {% for quote in quotes %}
+        <tr>
+            <td>{{ quote.job_id }}</td>
+            <td>{{ quote.job_name }}</td>
+            <td>{{ quote.client }}</td>
+            <td><a href="{% url 'quotes:detail' job.pk %}">edit</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+
+{%  extends 'base.html' %}
+
+{% block title %}Jobs{% endblock %}
+
+{% block body %}
+
+{#    <a href="{% url 'jobs:job-create' %}" class="btn btn-default col-sm-offset-10  ">Add Job</a>#}
+
+    <table class="table table-bordered table-condensed table-striped table-hover" style="width:60%">
+        <tr>
+            <td>JobID</td>
+            <td>Name</td>
+            <td>Client</td>
+        </tr>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.job_id }}</td>
+            <td>{{ job.job_name }}</td>
+            <td>{{ job.client }}</td>
+{#            <td><a href="{% url 'jobs:detail' job.job_id %}" class="btn-sm btn-default">View</a> <a href="{% url 'jobs:job-update' job.job_id %}" class="btn-sm btn-default">Update</a></td>#}
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}
