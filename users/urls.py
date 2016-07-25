@@ -10,12 +10,12 @@ urlpatterns = [
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 
     url(r'^login/$', auth_views.login,{
-        # 'redirect_field_name': 'home:index',
+        'redirect_field_name': 'home:index',
         'template_name': 'users/login.html',
     }, name='login'),
 
     url(r'^logout/$', auth_views.logout,{
-        # 'redirect_field_name': 'home:index',
+        'redirect_field_name': 'home:index',
         'template_name': 'users/logout.html',
     },  name='logout')
 ]

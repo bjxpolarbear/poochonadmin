@@ -50,39 +50,3 @@ class UserFormView(View):
 
         return render(request, self.template_name, context={'form':form})
 
-'''
-class LoginFormView(FormView):
-    form_class = AuthenticationForm
-    template_name = 'users/login.html'
-    redirect_field_name = 'home:index'
-
-    @method_decorator(csrf_protect)
-    @method_decorator(never_cache)
-
-    def get_success_url(self):
-
-        if self.success_url:
-            redirect_to = self.success_url
-        else:
-            redirect_to = self.redirect_field_name
-        return redirect_to
-
-
-    # display a blank form
-    def get(self,request, *args, **kwargs):
-        return super(LoginFormView, self).get(request, *args, **kwargs)
-
-
-    # process form data
-    def post(self, request, *args, **kwargs):
-
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-
-        if form.is_valid():
-            login(self.request, form.get_user())
-            return redirect('home:index')
-
-        else:
-            return redirect('users:login')
-'''
