@@ -24,6 +24,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+# login required URL
+LOGIN_URL = 'users:login'
+# Login redirections
+LOGIN_REDIRECT_URL = 'home:index'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
