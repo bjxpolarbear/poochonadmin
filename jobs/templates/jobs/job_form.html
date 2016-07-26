@@ -14,7 +14,7 @@
 
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-{#                        {% include 'form-template.html' %}#}
+
                         {{ form_1.as_p }}
                         {{ form_2.as_p }}
 

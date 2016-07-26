@@ -59,5 +59,5 @@ class Procedure(MP_Node):
 
 class JobProcedure(models.Model):
 
-    job_id = models.ForeignKey(Job, db_column='Job_ID', on_delete=models.CASCADE)
-    procedure_id = models.ForeignKey(Procedure, db_column='Procedure_ID', on_delete=models.PROTECT)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    procedure = models.ForeignKey(Procedure, on_delete=models.PROTECT)

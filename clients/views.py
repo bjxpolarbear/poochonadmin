@@ -1,11 +1,12 @@
-# from django.shortcuts import render
-# from django.shortcuts import render, get_object_or_404
+
 from django.views import generic
 from .models import Client
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
+
+import pdb
 
 class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = 'clients/index.html'

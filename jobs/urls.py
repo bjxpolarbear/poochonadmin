@@ -14,7 +14,7 @@ urlpatterns = [
     # /jobs/create
     url(r'^create/$', views.JobCreateView.as_view(), name='job-create'),
 
-    # # /jobs/<job_id>/update
-    # url(r'^(?P<job_id>[0-9]+)/update/$', views.JobUpdate.as_view(), name='job-update'),
+    # /jobs/<job_id>/update
+    url(r'^(?P<job_id>[0-9]+)/update/$', views.JobUpdateView.as_view(), name='job-update'),
 
 ]

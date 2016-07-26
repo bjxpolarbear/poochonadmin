@@ -2,7 +2,6 @@ from django import forms
 from .models import Job, Procedure
 import datetime
 
-import pdb
 
 #  customize the display of job form
 class ProcedureModelMultipleChoiceField(forms.ModelMultipleChoiceField):
@@ -27,4 +26,4 @@ class JobCreateForm(forms.ModelForm):
 
 class JobProcedureForm(forms.Form):
     queryset = Procedure.get_tree(parent=None)
-    procedure = ProcedureModelMultipleChoiceField(queryset=queryset,widget=forms.CheckboxSelectMultiple())
+    procedure = ProcedureModelMultipleChoiceField(queryset=queryset, widget=forms.CheckboxSelectMultiple())
