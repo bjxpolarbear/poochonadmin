@@ -9,6 +9,7 @@ class JobType(models.Model):
     tag = models.CharField(db_column='Job_Tag', max_length=50)
     type = models.CharField(db_column='Job_Type_Name', max_length=255)
     note = models.TextField(db_column='Job_Note', blank=True, null=True)
+    is_active = models.BooleanField(db_column='Is_Active', default=True)
 
     def __str__(self):
         return self.tag + ' ' + self.type

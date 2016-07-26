@@ -1,9 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.views import generic
-from .models import Client
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+from .models import Client
 # Create your views here.
 
 import pdb

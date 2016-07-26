@@ -1,0 +1,41 @@
+
+{%  extends 'base.html' %}
+
+{% block title %}Inventory{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-sm-10">
+            <table class="table table-bordered table-condensed table-striped table-hover" >
+                <tr class="table-row">
+                    <td>ItemID</td>
+                    <td>Name</td>
+                    <td>Unit</td>
+                    <td>Quantity</td>
+                    <td>Locations</td>
+                    <td>Date Received</td>
+                    <td></td>
+                </tr>
+                {% for item in items %}
+                <tr class="table-row">
+                    <td>{{ item.item_id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.unit }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.location }}</td>
+                    <td>{{ item.date_received }}</td>
+                    <td><a href="{% url 'inventory:detail' item.pk %}" class="btn-sm btn-default">View</a> <a href="{% url 'inventory:item-update' item.pk %}" class="btn-sm btn-default">Update</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+        <div class="col-sm-2 ">
+            <a href="{% url 'inventory:item-create' %}" class="btn btn-default">Add Item</a>
+        </div>
+    </div>
+
+
+{% endblock %}

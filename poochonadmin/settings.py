@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'clients.apps.ClientsConfig',
     'jobs.apps.JobsConfig',
     'quotes.apps.QuotesConfig',
+    'inventory.apps.InventoryConfig'
 ]
 
 
