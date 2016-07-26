@@ -17,4 +17,6 @@ urlpatterns = [
     # /jobs/<job_id>/update
     url(r'^(?P<job_id>[0-9]+)/update/$', views.JobUpdateView.as_view(), name='job-update'),
 
+    # /jobs/<job_id>/delete/
+    url(r'^(?P<job_id>[0-9]+)/delete/$', views.JobDeleteView.as_view(), name='job-delete')
 ]

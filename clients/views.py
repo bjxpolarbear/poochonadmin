@@ -1,4 +1,4 @@
-
+from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import Client
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -13,7 +13,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'clients'
 
     def get_queryset(self):
-        return Client.objects.all()
+        return Client.objects.all().order_by('last_name')
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):

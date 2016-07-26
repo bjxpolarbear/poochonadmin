@@ -4,6 +4,8 @@
 {% block title %}Clients{% endblock %}
 
 {% block body %}
+    <a href="{% url 'clients:client-create' %}" class="btn btn-default col-sm-offset-10  ">Add Client</a>
+
     <table class="table table-bordered table-condensed table-striped table-hover" style="width:60%">
         <tr class="table-row">
             <td>ClientID</td>

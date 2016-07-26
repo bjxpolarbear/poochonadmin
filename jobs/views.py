@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -85,10 +86,12 @@ class JobUpdateView(generic.base.TemplateView, LoginRequiredMixin):
             procedures_pk = request.POST.getlist('procedure')
             procedures_pk = fill_procedure(procedures_pk)
             procedures = Procedure.objects.filter(procedure_id__in=procedures_pk)
+
+            # load the old procedure list
             old_procedures = Procedure.objects.filter(jobprocedure__job__job_id=job_id)
 
-
-            for_delete = set(old_procedures).difference(set(procedures))  #Find the procedures in old list but not in new list
+            # Find the procedures in old list but not in new list
+            for_delete = set(old_procedures).difference(set(procedures))
 
             JobProcedure.objects.filter(procedure__in=for_delete).delete()
             # pdb.set_trace()
@@ -101,6 +104,22 @@ class JobUpdateView(generic.base.TemplateView, LoginRequiredMixin):
             return HttpResponseRedirect('/jobs/')
 
 
+class JobDeleteView(generic.base.TemplateView, LoginRequiredMixin):
+    template_name = 'jobs/job_confirm_delete.html'
+    success_url = 'jobs:index'
+
+    def post(self, request, job_id, **kwargs):
+        instance = get_object_or_404(Job, job_id=job_id)
+        instance.delete()
+        job_procedures = JobProcedure.objects.filter(job__job_id=job_id)
+        for job_procedure in job_procedures:
+            job_procedure.delete()
+
+        return HttpResponseRedirect(reverse(self.success_url))
+
+
+
+# quick script to make a complete tree
 def fill_procedure(procedures_pk):
     # filling the ancestors
     for procedure_pk in procedures_pk:

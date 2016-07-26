@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)$', views.DetailView.as_view(), name='detail'),
 
     # /clients/add
-    url(r'^add/$', views.ClientCreate.as_view(), name='client-add'),
+    url(r'^create/$', views.ClientCreate.as_view(), name='client-create'),
 
     # /clients/<client_id>/update/
     url(r'^(?P<pk>[0-9]+)/update/$', views.ClientUpdate.as_view(), name='client-update'),
