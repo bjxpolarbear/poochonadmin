@@ -1,7 +1,22 @@
 from django.db import models
+from treebeard.mp_tree import MP_Node
 
 
-# Create your models here.
+class Procedure(MP_Node):
+    procedure_id = models.AutoField(db_column='Procedure_ID', primary_key=True)
+    name = models.CharField(db_column='Name', max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    def indented_name(self):
+        full_name = ''
+        full_name += '----' * (self.depth - 1)
+        full_name += '>'
+
+        return full_name + self.name
+
+
 class SampleType(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
@@ -44,7 +59,7 @@ class QuoteStatus(models.Model):
 
 class ItemCategory(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
-    is_active = models.BooleanField(db_column='Is_Active',default=True)
+    is_active = models.BooleanField(db_column='Is_Active', default=True)
 
     def __str__(self):
         return self.name

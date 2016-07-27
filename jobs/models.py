@@ -1,9 +1,8 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from treebeard.mp_tree import MP_Node
 
 from clients.models import Client
-from structure.models import JobType, JobStatus
+from structure.models import JobType, JobStatus, Procedure
 
 
 class Job(models.Model):
@@ -22,21 +21,6 @@ class Job(models.Model):
 
     def __str__(self):
         return self.client.__str__() + ': ' + self.job_name
-
-
-class Procedure(MP_Node):
-    procedure_id = models.AutoField(db_column='Procedure_ID', primary_key=True)
-    name = models.CharField(db_column='Name', max_length=255)
-
-    def __str__(self):
-        return self.name
-
-    def indented_name(self):
-        full_name = ''
-        full_name += '----' * (self.depth - 1)
-        full_name += '>'
-
-        return full_name + self.name
 
 
 class JobProcedure(models.Model):
