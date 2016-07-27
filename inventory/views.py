@@ -24,36 +24,10 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Item
     form_class = ItemForm
 
-    # fields = [
-    #     'name',
-    #     'item_id',
-    #     'category',
-    #     'unit',
-    #     'quantity',
-    #     'unit_price',
-    #     'date_received',
-    #     'location',
-    #     'sub_location',
-    #     'description',
-    # ]
-
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model = Item
     form_class = ItemForm
-
-    # fields = [
-    #     'name',
-    #     'item_id',
-    #     'category',
-    #     'unit',
-    #     'quantity',
-    #     'unit_price',
-    #     'date_received',
-    #     'location',
-    #     'sub_location',
-    #     'description',
-    # ]
 
 
 class ClientDeleteView(LoginRequiredMixin, DeleteView):

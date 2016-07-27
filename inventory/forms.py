@@ -3,6 +3,7 @@ import datetime
 
 from .models import Item
 
+
 class ItemForm(forms.ModelForm):
 
     date_received = forms.DateField(widget=forms.SelectDateWidget(),initial=datetime.datetime.now)
@@ -18,6 +19,5 @@ class ItemForm(forms.ModelForm):
             'unit_price',
             'date_received',
             'location',
-            'sub_location',
             'description',
         ]

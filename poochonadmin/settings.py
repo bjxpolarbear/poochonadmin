@@ -65,7 +65,8 @@ INSTALLED_APPS = [
     'clients.apps.ClientsConfig',
     'jobs.apps.JobsConfig',
     'quotes.apps.QuotesConfig',
-    'inventory.apps.InventoryConfig'
+    'inventory.apps.InventoryConfig',
+    'structure.apps.StructureConfig',
 ]
 
 
@@ -151,8 +152,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 # Register database schemes in URLs.
 urllib.parse.uses_netloc.append('mysql')
 
@@ -182,5 +181,6 @@ try:
 
         if url.scheme == 'mysql':
             DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+
 except Exception:
     print('Unexpected error:', sys.exc_info())
