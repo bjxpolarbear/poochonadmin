@@ -4,29 +4,33 @@
 {% block title %}Quotes{% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
 
-        <div class="col-sm-10">
+            <div class="col-sm-10">
 
-            <table class="table table-bordered table-condensed table-striped table-hover">
-                <tr>
-                    <td>Quote ID</td>
-                    <td>Client</td>
-                    <td>Name</td>
-                </tr>
-                {% for quote in quotes %}
-                <tr>
-                    <td>{{ quote.job_id }}</td>
-                    <td>{{ quote.job_name }}</td>
-                    <td>{{ quote.client }}</td>
-                    <td><a href="{% url 'quotes:detail' job.pk %}">edit</a></td>
-                </tr>
-                {% endfor %}
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <tr>
+                        <td>Quote ID</td>
+                        <td>Client</td>
+                        <td>Name</td>
+                        <td></td>
+                    </tr>
+                    {% for quote in quotes %}
+                    <tr>
+                        <td>{{ quote.pk }}</td>
+                        <td>{{ quote.client }}</td>
+                        <td>{{ quote.name }}</td>
+                        <td><a href="{% url 'quotes:detail' quote.pk %}" class="btn-sm btn-default">View</a>
+                            <a href="{% url 'quotes:quote-update' quote.pk %}" class="btn-sm btn-default">Update</a></td>
+                    </tr>
+                    {% endfor %}
 
-            </table>
-        </div>
-        <div class="col-sm-2 ">
-{#            <a href="{% url 'inventory:item-create' %}" class="btn btn-default">New Quote</a>#}
+                </table>
+            </div>
+            <div class="col-sm-2 ">
+                <a href="{% url 'quotes:quote-create' %}" class="btn btn-default">New Quote</a>
+            </div>
         </div>
     </div>
 {% endblock %}

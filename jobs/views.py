@@ -7,7 +7,7 @@ from django.forms.models import model_to_dict
 import pdb
 
 from .forms import JobCreateForm, JobProcedureForm
-from .models import JobType, Job, Procedure, JobProcedure
+from .models import Job, Procedure, JobProcedure
 # Create your views here.
 
 class JobIndexView(LoginRequiredMixin, generic.ListView):
@@ -36,7 +36,7 @@ class JobDetailView(LoginRequiredMixin, generic.base.TemplateView):
         return context
 
 
-class JobCreateView(generic.base.TemplateView, LoginRequiredMixin):
+class JobCreateView(LoginRequiredMixin, generic.base.TemplateView):
     template_name = 'jobs/job_form.html'
 
     def get(self,request, **kwargs):
@@ -56,11 +56,11 @@ class JobCreateView(generic.base.TemplateView, LoginRequiredMixin):
             for procedure_pk in procedures_pk:
                 JobProcedure.objects.create(job=new_job, procedure=Procedure.objects.get(pk=procedure_pk))
 
-            return HttpResponseRedirect('/jobs/')
+            return HttpResponseRedirect(reverse('jobs:index'))
 
         else:
 
-            return HttpResponseRedirect('/jobs/add')
+            return HttpResponseRedirect(reverse('jobs:job-create'))
 
 
 class JobUpdateView(generic.base.TemplateView, LoginRequiredMixin):
@@ -99,9 +99,7 @@ class JobUpdateView(generic.base.TemplateView, LoginRequiredMixin):
                 JobProcedure.objects.get_or_create(job=Job.objects.get(job_id=job_id),procedure=Procedure.objects.get(procedure_id=procedure_pk))
 
 
-
-
-            return HttpResponseRedirect('/jobs/')
+            return HttpResponseRedirect(reverse('jobs:index'))
 
 
 class JobDeleteView(generic.base.TemplateView, LoginRequiredMixin):

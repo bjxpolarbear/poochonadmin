@@ -23,8 +23,9 @@ class Client(models.Model):
 
     class Meta:
         managed = True
-        # db_table = 'clients_client'
-
+        permissions = (
+            ("view_client", "Can view client"),
+        )
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name

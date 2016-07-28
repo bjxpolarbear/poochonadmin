@@ -20,8 +20,14 @@ class Item(models.Model):
     # I don't feel the payment field is necessay
     # payment = models.CharField(db_column='Location', max_length=255, blank=True, null=True)
 
+    class Meta:
+        permissions = (
+            ("view_item", "Can view item"),
+        )
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('inventory:detail', kwargs={'pk': self.id})
+

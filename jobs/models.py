@@ -16,6 +16,11 @@ class Job(models.Model):
     job_status = models.ForeignKey(JobStatus, db_column='Job_Status', on_delete=models.PROTECT)
     # sample_prep = models.ManyToOneRel
 
+    class Meta:
+        permissions = (
+            ("view_job", "Can view job"),
+         )
+
     def get_absolute_url(self):
         return reverse('jobs:detail', kwargs={'pk': self.pk})
 
@@ -27,3 +32,8 @@ class JobProcedure(models.Model):
 
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     procedure = models.ForeignKey(Procedure, on_delete=models.PROTECT)
+
+    class Meta:
+        permissions = (
+            ("view_jobprocedure", "Can view jobprocedure"),
+         )

@@ -6,6 +6,11 @@ class Procedure(MP_Node):
     procedure_id = models.AutoField(db_column='Procedure_ID', primary_key=True)
     name = models.CharField(db_column='Name', max_length=255)
 
+    class Meta:
+        permissions = (
+            ("view_procedure", "Can view procedure"),
+        )
+
     def __str__(self):
         return self.name
 
@@ -21,6 +26,11 @@ class SampleType(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
 
+    class Meta:
+        permissions = (
+            ("view_sampletype", "Can view sampletype"),
+        )
+
     def __str__(self):
         return self.name
 
@@ -28,6 +38,11 @@ class SampleType(models.Model):
 class SampleStatus(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
+
+    class Meta:
+        permissions = (
+            ("view_samplestatus", "Can view samplestatus"),
+        )
 
     def __str__(self):
         return self.name
@@ -37,6 +52,11 @@ class Organism(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
 
+    class Meta:
+        permissions = (
+            ("view_organism", "Can view organism"),
+        )
+
     def __str__(self):
         return self.name
 
@@ -44,6 +64,11 @@ class Organism(models.Model):
 class PaymentTerm(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
+
+    class Meta:
+        permissions = (
+            ("view_paymentterm", "Can view paymentterm"),
+        )
 
     def __str__(self):
         return self.name
@@ -53,6 +78,11 @@ class QuoteStatus(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
 
+    class Meta:
+        permissions = (
+            ("view_quotestatus", "Can view quotestatus"),
+        )
+
     def __str__(self):
         return self.name
 
@@ -60,6 +90,11 @@ class QuoteStatus(models.Model):
 class ItemCategory(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
+
+    class Meta:
+        permissions = (
+            ("view_ItemCategory", "Can view ItemCategory"),
+        )
 
     def __str__(self):
         return self.name
@@ -73,6 +108,11 @@ class JobType(models.Model):
     note = models.TextField(db_column='Job_Note', blank=True, null=True)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
 
+    class Meta:
+        permissions = (
+            ("view_jobtype", "Can view jobtype"),
+        )
+
     def __str__(self):
         return self.tag + ' ' + self.type
 
@@ -80,6 +120,11 @@ class JobType(models.Model):
 class JobStatus(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
+
+    class Meta:
+        permissions = (
+            ("view_jobstatus", "Can view jobstatus"),
+        )
 
     def __str__(self):
         return self.name

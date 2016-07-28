@@ -17,6 +17,11 @@ class Quote(models.Model):
 
     job_type = models.ForeignKey(jobs_models.JobType, on_delete=models.PROTECT)
 
+    class Meta:
+        permissions = (
+            ("view_quote", "Can view quote"),
+        )
+
     def __str__(self):
         return self.client + ': ' + self.name
 
@@ -32,10 +37,15 @@ class Sample(models.Model):
     date_received = models.DateField(db_column='Date_Received', blank=True, null=True)
     location = models.CharField(db_column='Location', max_length=255)
     storage = models.CharField(db_column='Storage', max_length=255, blank=True, null=True)
-
-    client = models.ForeignKey(clients_models.Client, on_delete=models.PROTECT, related_name='sample_client')
-    quote = models.ForeignKey(Quote, on_delete=models.PROTECT, related_name='sample_quote', blank=True, null=True)
+    client = models.ForeignKey(clients_models.Client, on_delete=models.PROTECT)#, related_name='sample_client')
+    quote = models.ForeignKey(Quote, on_delete=models.PROTECT, blank=True, null=True)#, related_name='sample_quote')
     job = models.ForeignKey(jobs_models.Job, on_delete=models.PROTECT, blank=True, null=True, related_name='sample_job')
+
+
+    class Meta:
+        permissions = (
+            ("view_sample", "Can view sample"),
+        )
 
     def __str__(self):
         return self.client + ': ' + self.name
@@ -45,3 +55,9 @@ class QuoteProcedure(models.Model):
 
     quote = models.ForeignKey(Quote, db_column='Job_ID', on_delete=models.CASCADE)
     procedure = models.ForeignKey(jobs_models.Procedure, db_column='Procedure_ID', on_delete=models.PROTECT)
+
+
+    class Meta:
+        permissions = (
+            ("view_quoteprocedure", "Can view quoteprocedure"),
+        )

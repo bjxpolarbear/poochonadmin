@@ -1,0 +1,34 @@
+{%  extends 'base.html' %}
+
+{% block title %}Quote Detail{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="panel panel-default " >
+            <div class="panel-heading">Quote Info: {{ quote.name }}</div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    Job ID:
+                    {{ quote.pk }}
+                </div>
+                <div class="col-sm-4">
+                    Client ID:
+                    {{ client.clientid }}
+                </div>
+                <div class="col-sm-4">
+                    Client Name:
+                    {{ client.first_name }} {{ client.last_name }}
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <a class="btn btn-danger btn-sm" href="{% url 'quotes:quote-delete' quote.pk%}">Delete</a>
+        </div>
+
+
+    </div>
+
+{% endblock %}
