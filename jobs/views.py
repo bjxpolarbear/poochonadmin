@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.forms.models import model_to_dict
 import pdb
@@ -10,7 +10,10 @@ from .forms import JobCreateForm, JobProcedureForm
 from .models import Job, Procedure, JobProcedure
 # Create your views here.
 
-class JobIndexView(LoginRequiredMixin, generic.ListView):
+class JobIndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
+    permission_required = 'jobs.view_job'
+    raise_exception = True
+
     template_name = 'jobs/index.html'
     context_object_name = 'jobs'
 
@@ -18,7 +21,9 @@ class JobIndexView(LoginRequiredMixin, generic.ListView):
         return Job.objects.all()
 
 
-class JobDetailView(LoginRequiredMixin, generic.base.TemplateView):
+class JobDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('jobs.view_job', 'jobs.view_jobprocedure')
+    raise_exception = True
 
     template_name = 'jobs/detail.html'
 
@@ -36,7 +41,10 @@ class JobDetailView(LoginRequiredMixin, generic.base.TemplateView):
         return context
 
 
-class JobCreateView(LoginRequiredMixin, generic.base.TemplateView):
+class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('jobs.add_job', 'jobs.add_jobprocedure')
+    raise_exception = True
+
     template_name = 'jobs/job_form.html'
 
     def get(self,request, **kwargs):
@@ -63,7 +71,10 @@ class JobCreateView(LoginRequiredMixin, generic.base.TemplateView):
             return HttpResponseRedirect(reverse('jobs:job-create'))
 
 
-class JobUpdateView(generic.base.TemplateView, LoginRequiredMixin):
+class JobUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('jobs.change_job', 'jobs.add_jobprocedure', 'jobs.change_jobprocedure', 'jobs.delete_jobprocedure')
+    raise_exception = True
+
     template_name = 'jobs/job_form.html'
 
     def get(self, request, job_id, **kwargs):
@@ -102,7 +113,10 @@ class JobUpdateView(generic.base.TemplateView, LoginRequiredMixin):
             return HttpResponseRedirect(reverse('jobs:index'))
 
 
-class JobDeleteView(generic.base.TemplateView, LoginRequiredMixin):
+class JobDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('jobs.delete_job','jobs.delete_jobprocedure')
+    raise_exception = True
+
     template_name = 'jobs/job_confirm_delete.html'
     success_url = 'jobs:index'
 
@@ -114,7 +128,6 @@ class JobDeleteView(generic.base.TemplateView, LoginRequiredMixin):
             job_procedure.delete()
 
         return HttpResponseRedirect(reverse(self.success_url))
-
 
 
 # quick script to make a complete tree

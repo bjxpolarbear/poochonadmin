@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views import generic
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -13,7 +13,10 @@ from jobs.views import fill_procedure
 
 
 # Create your views here.
-class QuoteIndexView(LoginRequiredMixin, generic.ListView):
+class QuoteIndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
+    permission_required = 'quotes.view_quote'
+    raise_exception = True
+
     template_name = 'quotes/index.html'
     context_object_name = 'quotes'
 
@@ -21,7 +24,9 @@ class QuoteIndexView(LoginRequiredMixin, generic.ListView):
         return Quote.objects.all()
 
 
-class QuoteDetailView(LoginRequiredMixin, generic.base.TemplateView):
+class QuoteDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('quotes.view_quote', 'quotes.view_quoteprocedure')
+    raise_exception = True
 
     template_name = 'quotes/detail.html'
 
@@ -39,7 +44,10 @@ class QuoteDetailView(LoginRequiredMixin, generic.base.TemplateView):
         return context
 
 
-class QuoteCreateView(LoginRequiredMixin, generic.base.TemplateView):
+class QuoteCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('quotes.add_quote', 'quotes.add_quoteprocedure')
+    raise_exception = True
+
     template_name = 'jobs/job_form.html'
 
     def get(self,request, **kwargs):
@@ -65,7 +73,10 @@ class QuoteCreateView(LoginRequiredMixin, generic.base.TemplateView):
 
             return HttpResponseRedirect(reverse('quotes:quote-create'))
 
-class QuoteUpdateView(generic.base.TemplateView, LoginRequiredMixin):
+class QuoteUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('quotes.change_quote', 'quotes.add_quoteprocedure', 'quotes.change_quoteprocedure', 'quotes.delete_quoteprocedure')
+    raise_exception = True
+
     template_name = 'jobs/job_form.html'
 
     def get(self, request, pk, **kwargs):
@@ -104,7 +115,10 @@ class QuoteUpdateView(generic.base.TemplateView, LoginRequiredMixin):
             return HttpResponseRedirect(reverse('jobs:index'))
 
 
-class QuoteDeleteView(generic.base.TemplateView, LoginRequiredMixin):
+class QuoteDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('quotes.delete_quote', 'quotes.delete_quoteprocedure')
+    raise_exception = True
+
     template_name = 'jobs/job_confirm_delete.html'
     success_url = 'quotes:index'
 

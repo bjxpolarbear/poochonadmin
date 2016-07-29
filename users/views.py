@@ -7,12 +7,14 @@ from django.views.generic.edit import FormView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import UserForm
 
 # Create your views here.
 
-class UserFormView(LoginRequiredMixin, View):
+class UserFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'auth.add_user'
+    raise_exception = True
 
     form_class = UserForm
     template_name = 'users/registration.html'

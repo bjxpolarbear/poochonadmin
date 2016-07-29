@@ -2,37 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="048c484e-f198-46a7-baa3-2ab242861484" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/inventory/templates/inventory/item_confirm_delete.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quotes/templates/quotes/detail.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/poochonadmin/static/treebeard/expand-collapse.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/poochonadmin/static/treebeard/jquery-ui-1.8.5.custom.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/poochonadmin/static/treebeard/treebeard-admin.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/poochonadmin/static/treebeard/treebeard-admin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/admin/tree_change_list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/admin/tree_change_list_results.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/admin/tree_list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/admin/tree_list_results.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/poochonadmin/static/placeholder" afterPath="$PROJECT_DIR$/structure/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/403.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clients/models.py" afterPath="$PROJECT_DIR$/clients/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inventory/models.py" afterPath="$PROJECT_DIR$/inventory/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inventory/templates/inventory/index.html" afterPath="$PROJECT_DIR$/inventory/templates/inventory/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inventory/urls.py" afterPath="$PROJECT_DIR$/inventory/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clients/views.py" afterPath="$PROJECT_DIR$/clients/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inventory/views.py" afterPath="$PROJECT_DIR$/inventory/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/forms.py" afterPath="$PROJECT_DIR$/jobs/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/models.py" afterPath="$PROJECT_DIR$/jobs/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/templates/jobs/detail.html" afterPath="$PROJECT_DIR$/jobs/templates/jobs/detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/templates/jobs/index.html" afterPath="$PROJECT_DIR$/jobs/templates/jobs/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/templates/jobs/job_form.html" afterPath="$PROJECT_DIR$/jobs/templates/jobs/job_form.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobs/views.py" afterPath="$PROJECT_DIR$/jobs/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quotes/models.py" afterPath="$PROJECT_DIR$/quotes/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quotes/templates/quotes/index.html" afterPath="$PROJECT_DIR$/quotes/templates/quotes/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quotes/urls.py" afterPath="$PROJECT_DIR$/quotes/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quotes/views.py" afterPath="$PROJECT_DIR$/quotes/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/structure/models.py" afterPath="$PROJECT_DIR$/structure/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/users/admin.py" afterPath="$PROJECT_DIR$/users/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/users/models.py" afterPath="$PROJECT_DIR$/users/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/users/views.py" afterPath="$PROJECT_DIR$/users/views.py" />
     </list>
     <ignored path="poochonadmin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,7 +36,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inventory/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
+            <state relative-caret-position="836">
               <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -68,38 +45,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quotes/models.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clients/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="921">
-              <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="62" selection-end-column="9" />
+            <state relative-caret-position="-1562">
+              <caret line="12" column="79" selection-start-line="12" selection-start-column="79" selection-end-line="15" selection-end-column="0" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#0#44#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/structure/models.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/inventory/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1245">
-              <caret line="128" column="22" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
+            <state relative-caret-position="1292">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inventory/views.py">
+        <entry file="file://$PROJECT_DIR$/structure/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="988">
-              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,13 +97,11 @@
       <list>
         <option value="$PROJECT_DIR$/clients/admin.py" />
         <option value="$PROJECT_DIR$/users/urls.py" />
-        <option value="$PROJECT_DIR$/users/views.py" />
         <option value="$PROJECT_DIR$/clients/templates/clients/index.html" />
         <option value="$PROJECT_DIR$/jobs/urls.py" />
         <option value="$PROJECT_DIR$/clients/templates/clients/detail.html" />
         <option value="$PROJECT_DIR$/jobs/templates/jobs/job_confirm_delete.html" />
         <option value="$PROJECT_DIR$/clients/templates/clients/client_confirm_delete.html" />
-        <option value="$PROJECT_DIR$/clients/views.py" />
         <option value="$PROJECT_DIR$/clients/urls.py" />
         <option value="$PROJECT_DIR$/poochonadmin/urls.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
@@ -145,15 +118,12 @@
         <option value="$PROJECT_DIR$/jobs/forms.py" />
         <option value="$PROJECT_DIR$/quotes/forms.py" />
         <option value="$PROJECT_DIR$/inventory/urls.py" />
-        <option value="$PROJECT_DIR$/jobs/views.py" />
         <option value="$PROJECT_DIR$/inventory/templates/inventory/index.html" />
         <option value="$PROJECT_DIR$/quotes/urls.py" />
         <option value="$PROJECT_DIR$/quotes/templates/quotes/index.html" />
-        <option value="$PROJECT_DIR$/quotes/views.py" />
         <option value="$PROJECT_DIR$/jobs/templates/jobs/detail.html" />
         <option value="$PROJECT_DIR$/quotes/templates/quotes/detail.html" />
         <option value="$PROJECT_DIR$/jobs/templates/jobs/index.html" />
-        <option value="$PROJECT_DIR$/inventory/views.py" />
         <option value="$PROJECT_DIR$/jobs/templates/jobs/job_form.html" />
         <option value="$PROJECT_DIR$/users/admin.py" />
         <option value="$PROJECT_DIR$/poochonadmin/__init__.py" />
@@ -161,9 +131,15 @@
         <option value="$PROJECT_DIR$/clients/models.py" />
         <option value="$PROJECT_DIR$/inventory/models.py" />
         <option value="$PROJECT_DIR$/jobs/models.py" />
-        <option value="$PROJECT_DIR$/quotes/models.py" />
         <option value="$PROJECT_DIR$/users/models.py" />
         <option value="$PROJECT_DIR$/structure/models.py" />
+        <option value="$PROJECT_DIR$/templates/403.html" />
+        <option value="$PROJECT_DIR$/clients/views.py" />
+        <option value="$PROJECT_DIR$/jobs/views.py" />
+        <option value="$PROJECT_DIR$/inventory/views.py" />
+        <option value="$PROJECT_DIR$/quotes/views.py" />
+        <option value="$PROJECT_DIR$/quotes/models.py" />
+        <option value="$PROJECT_DIR$/users/views.py" />
       </list>
     </option>
   </component>
@@ -543,7 +519,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2622" height="1850" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2200957" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -551,9 +527,9 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956687" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17953546" sideWeight="0.4984051" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17953546" sideWeight="0.4984051" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52102953" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45699936" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -581,27 +557,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/jobs/templates/jobs/job_confirm_delete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/clients/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/poochonadmin/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2394">
@@ -623,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1672">
-          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/inventory/templates/inventory/item_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
@@ -641,6 +589,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1786">
           <caret line="47" column="99" selection-start-line="47" selection-start-column="99" selection-end-line="47" selection-end-column="99" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -711,6 +660,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="836">
           <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -735,6 +687,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -742,6 +697,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -749,6 +705,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="20" selection-end-column="90" />
+          <folding>
+            <element signature="e#0#19#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -756,6 +715,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -763,13 +725,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="880">
           <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quotes/templates/quotes/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -777,6 +733,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="678">
           <caret line="30" column="34" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -784,13 +741,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quotes/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="997">
-          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -798,6 +749,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -806,17 +758,7 @@
         <state relative-caret-position="266">
           <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobs/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3876">
-          <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -837,20 +779,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inventory/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -877,32 +810,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobs/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quotes/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1824">
           <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inventory/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -912,17 +825,7 @@
         <state relative-caret-position="38">
           <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quotes/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="921">
-          <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="62" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -932,7 +835,105 @@
         <state relative-caret-position="1245">
           <caret line="128" column="22" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
           <folding>
+            <element signature="e#0#28#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quotes/templates/quotes/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/403.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jobs/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="804">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inventory/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
+          <folding>
             <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clients/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1562">
+          <caret line="12" column="79" selection-start-line="12" selection-start-column="79" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quotes/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1678">
+          <caret line="55" column="108" selection-start-line="55" selection-start-column="108" selection-end-line="55" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quotes/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jobs/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="15" column="0" selection-start-line="12" selection-start-column="82" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/structure/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inventory/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -41,7 +41,6 @@ class Sample(models.Model):
     quote = models.ForeignKey(Quote, on_delete=models.PROTECT, blank=True, null=True)#, related_name='sample_quote')
     job = models.ForeignKey(jobs_models.Job, on_delete=models.PROTECT, blank=True, null=True, related_name='sample_job')
 
-
     class Meta:
         permissions = (
             ("view_sample", "Can view sample"),
@@ -55,7 +54,6 @@ class QuoteProcedure(models.Model):
 
     quote = models.ForeignKey(Quote, db_column='Job_ID', on_delete=models.CASCADE)
     procedure = models.ForeignKey(jobs_models.Procedure, db_column='Procedure_ID', on_delete=models.PROTECT)
-
 
     class Meta:
         permissions = (

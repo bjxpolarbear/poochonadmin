@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 from .models import Client
@@ -10,7 +10,10 @@ from .models import Client
 
 import pdb
 
-class IndexView(LoginRequiredMixin, generic.ListView):
+class IndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
+    permission_required = 'clients.view_client'
+    raise_exception = True
+
     template_name = 'clients/index.html'
     context_object_name = 'clients'
 
@@ -18,12 +21,18 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         return Client.objects.all().order_by('last_name')
 
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
+    permission_required = 'clients.view_client'
+    raise_exception = True
+
     model = Client
     template_name = 'clients/detail.html'
 
 
-class ClientCreate(LoginRequiredMixin, CreateView):
+class ClientCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = 'clients.add_client'
+    raise_exception = True
+
     model = Client
     fields = [
         'first_name',
@@ -44,7 +53,10 @@ class ClientCreate(LoginRequiredMixin, CreateView):
     ]
 
 
-class ClientUpdate(LoginRequiredMixin, UpdateView):
+class ClientUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = 'clients.change_client'
+    raise_exception = True
+
     model = Client
     fields = [
         'first_name',
@@ -65,6 +77,9 @@ class ClientUpdate(LoginRequiredMixin, UpdateView):
     ]
 
 
-class ClientDelete(LoginRequiredMixin, DeleteView):
+class ClientDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = 'clients.delete_client'
+    raise_exception = True
+
     model = Client
     success_url = reverse_lazy('clients:index')
