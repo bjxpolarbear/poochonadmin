@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'     # keep it like this
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'staticfiles')
 
 # Extra places for collectstatic to find static files.
@@ -59,12 +59,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'treebeard',
+    'django_tables2',
 
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
     'clients.apps.ClientsConfig',
     'jobs.apps.JobsConfig',
     'quotes.apps.QuotesConfig',
+    'orders.apps.OrdersConfig',
     'inventory.apps.InventoryConfig',
     'structure.apps.StructureConfig',
 ]

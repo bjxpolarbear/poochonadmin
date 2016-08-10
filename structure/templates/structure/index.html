@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Structure Data{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+
+        <!-- Nav tabs -->
+        <div class="col-md-10 col-md-offset-1">
+            <ul class="nav nav-tabs " role="tablist">
+                <li role="presentation" class="active"><a href="#packages" aria-controls="packages" role="tab" data-toggle="tab">Packages</a></li>
+                <li role="presentation"><a href="#services" aria-controls="services" role="tab" data-toggle="tab">Services</a></li>
+                <li role="presentation"><a href="#procedures" aria-controls="procedures" role="tab" data-toggle="tab">Procedures</a></li>
+                <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Misc</a></li>
+            </ul>
+        </div>
+
+
+        <!-- Tab panes -->
+        <div class="col-md-10 col-md-offset-1">
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="packages">
+                Packages
+                <table class="table">
+                    <tr>
+                        <th>Tag</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Non-Profit Price</th>
+                        <th>Services</th>
+                    </tr>
+                    {% for package in packages %}
+                    <tr>
+                        <td>{{ package.tag }}</td>
+                        <td>{{ package.name }}</td>
+                        <td>{{ package.price }}</td>
+                        <td>{{ package.non_profit_price }}</td>
+                        <td>
+                            {% for service in package.services.all %}
+                                {{ service.name }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="services">
+                Services
+                <table class="table">
+                    <tr>
+                        <th>Tag</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Non-Profit Price</th>
+                        <th>Procedures</th>
+                    </tr>
+                    {% for service in services %}
+                    <tr>
+                        <td>{{ service.tag }}</td>
+                        <td>{{ service.name }}</td>
+                        <td>{{ service.price }}</td>
+                        <td>{{ service.non_profit_price }}</td>
+                        <td>
+                            {% for procedure in service.procedures.all %}
+                                {{ procedure.name }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="procedures">
+                Procedures
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+
+                    </tr>
+                    {% for procedure in procedures %}
+                    <tr>
+                        <td>{{ procedure.procedure_id }}</td>
+                        <td>{{ procedure.indented_name }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="misc">
+                Misc
+                <table class="table">
+                    <tr>
+                        <th>Data Type</th>
+                        <th>Content</th>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Quote Status</strong></td>
+                        <td>
+                            {% for quotestatus in quotestatuses %}
+                                {{ quotestatus.name }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Order Status</strong></td>
+                        <td>
+                            {% for orderstatus in orderstatuses %}
+                                {{ orderstatus.name }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Job Status</strong></td>
+                        <td>
+                            {% for jobstatus in jobstatuses %}
+                                {{ jobstatus.name }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

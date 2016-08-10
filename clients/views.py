@@ -3,9 +3,10 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
+from django_tables2 import SingleTableMixin
 
 from .models import Client
+from .tables import ClientTable
 # Create your views here.
 
 import pdb
@@ -13,7 +14,8 @@ import pdb
 class IndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     permission_required = 'clients.view_client'
     raise_exception = True
-
+    # model = Client
+    # table_class = ClientTable
     template_name = 'clients/index.html'
     context_object_name = 'clients'
 

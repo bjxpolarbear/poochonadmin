@@ -21,6 +21,45 @@ class Procedure(MP_Node):
 
         return full_name + self.name
 
+class Service(models.Model):
+
+    tag = models.CharField(db_column='Service_Tag', max_length=63)
+    name = models.CharField(db_column='Service_Name', max_length=255)
+    price = models.FloatField(db_column='Price')
+    non_profit_price = models.FloatField(db_column='None_Profit_Price', blank=True, null=True)
+    SOP = models.CharField(db_column='SOP', max_length=63, blank=True, null=True)
+    note = models.TextField(db_column='Service_Note', blank=True, null=True)
+    is_active = models.BooleanField(db_column='Is_Active', default=True)
+
+    procedures = models.ManyToManyField(Procedure)
+
+    class Meta:
+        permissions = (
+            ("view_service", "Can view service"),
+        )
+
+    def __str__(self):
+        return self.tag + ' ' + self.name
+
+class ServicePackage(models.Model):
+
+    tag = models.CharField(db_column='Service_Package_Tag', max_length=63)
+    name = models.CharField(db_column='Service_Package_Name', max_length=255)
+    price = models.FloatField(db_column='Price')
+    non_profit_price = models.FloatField(db_column='None_Profit_Price', blank=True, null=True)
+    note = models.TextField(db_column='Service_Package_Note', blank=True, null=True)
+    is_active = models.BooleanField(db_column='Is_Active', default=True)
+
+    services = models.ManyToManyField(Service)
+
+    class Meta:
+        permissions = (
+            ("view_servicepackage", "Can view service package"),
+        )
+
+    def __str__(self):
+        return self.tag + ' ' + self.name
+
 
 class SampleType(models.Model):
     name = models.CharField(db_column='Name', max_length=255)
@@ -100,22 +139,18 @@ class ItemCategory(models.Model):
         return self.name
 
 
-class JobType(models.Model):
+class OrderStatus(models.Model):
 
-    job_type_id = models.AutoField(db_column='Job_Type_ID', primary_key=True)
-    tag = models.CharField(db_column='Job_Tag', max_length=50)
-    type = models.CharField(db_column='Job_Type_Name', max_length=255)
-    note = models.TextField(db_column='Job_Note', blank=True, null=True)
+    name = models.CharField(db_column='Name', max_length=255)
     is_active = models.BooleanField(db_column='Is_Active', default=True)
 
     class Meta:
         permissions = (
-            ("view_jobtype", "Can view jobtype"),
+            ("view_orderstatus", "Can view orderstatus"),
         )
 
     def __str__(self):
-        return self.tag + ' ' + self.type
-
+        return self.name
 
 class JobStatus(models.Model):
     name = models.CharField(db_column='Name', max_length=255)

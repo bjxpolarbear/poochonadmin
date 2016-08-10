@@ -23,5 +23,7 @@ urlpatterns = [
     url(r'^users/', include('users.urls')),
     url(r'^jobs/', include('jobs.urls')),
     url(r'^quotes/', include('quotes.urls')),
+    url(r'^orders/', include('orders.urls')),
     url(r'^inventory/', include('inventory.urls')),
+    url(r'^structure/', include('structure.urls')),
 ]

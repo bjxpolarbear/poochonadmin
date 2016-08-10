@@ -1,34 +1,142 @@
 {%  extends 'base.html' %}
-
+{% load staticfiles %}
 {% block title %}Quote Detail{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+{% endblock %}
+
 
 {% block body %}
     <div class="container-fluid">
-        <div class="panel panel-default " >
-            <div class="panel-heading">Quote Info: {{ quote.name }}</div>
-
-            <div class="row">
-                <div class="col-sm-4">
-                    Job ID:
-                    {{ quote.pk }}
-                </div>
-                <div class="col-sm-4">
-                    Client ID:
-                    {{ client.clientid }}
-                </div>
-                <div class="col-sm-4">
-                    Client Name:
-                    {{ client.first_name }} {{ client.last_name }}
-                </div>
-            </div>
+        <div class="row">
+            <h3 class="text-center">Service Quotation</h3>
         </div>
 
 
-        <div>
-            <a class="btn btn-danger btn-sm" href="{% url 'quotes:quote-delete' quote.pk%}">Delete</a>
+        <div class="row">
+            <div class="col-xs-4 text-right">
+                <img src="{% static 'colorlogo.png' %}" alt="Poochon Logo" height="30">
+                <ul class="list-unstyled">
+                    <li>Poochon Scientific</li>
+                    <li>8435 Progress Drive, Ste. Y</li>
+                    <li>Frederick, MD 21701</li>
+                    <li>Phone: 240-291-7523</li>
+                    <li>Tax ID: 46-1552477</li>
+                </ul>
+
+            </div>
+            <div class="col-xs-5 col-xs-offset-2">
+                <ul class="list-unstyled" style="padding-top: 30px">
+                    <li>Quote No.: {{ quote_id }}</li>
+                    <li>Date: {{ quote.quote_date }}</li>
+                    <li>Expire Date: {{ quote.expire_date }}</li>
+                    <li>Payment Term: {{ quote.payment }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">To: </div>
+            <div class="col-xs-2 text-right bordergrid">{{ client.first_name }}</div>
+            <div class="col-xs-2 test-left bordergrid">{{ client.last_name }}</div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2 text-right">Customer ID: </div>
+            <div class="col-xs-1 test-left bordergrid">{{ client.customer_id }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">Company: </div>
+            <div class="col-xs-9 text-left bordergrid">{{ client.company }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">Address: </div>
+            <div class="col-xs-9 text-left bordergrid">{{ client.address }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">City: </div>
+            <div class="col-xs-2 text-right bordergrid">{{ client.city }}</div>
+            <div class="col-xs-2 test-right">State: </div>
+            <div class="col-xs-2 test-left bordergrid">{{ client.state }}</div>
+            <div class="col-xs-2 text-right">Zip: </div>
+            <div class="col-xs-1 test-left bordergrid">{{ client.zip }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">Quote Name: </div>
+            <div class="col-xs-9 text-left bordergrid">{{ quote.name }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">Service Package: </div>
+            <div class="col-xs-9 text-left bordergrid">
+                    {{ service_package }}<br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">Services: </div>
+            <div class="col-xs-8 text-left bordergrid">
+                {% for service in services %}
+                    {{ service }}<br>
+                {% endfor %}
+            </div>
+            <div class="col-xs-1 text-left bordergrid">
+                {% for service in services %}
+                    {{ service.price|floatformat:2 }}<br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">Summary: </div>
+            <div class="col-xs-8 text-left bordergrid">
+                Total:<br>
+                Discount:<br>
+                Tax:<br>
+                Unit Price:<br>
+            </div>
+            <div class="col-xs-1 text-left bordergrid" id="totals">
+                {{ total }}<br>
+                {{ discount}}<br>
+                {{ quote.pre_tax_final }}<br>
+                {{ unit_final }}<br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right"></div>
+            <div class="col-xs-6 text-right bordergrid">
+                Sample Number:<br>
+            </div>
+            <div class="col-xs-2 text-right bordergrid">{{ quote.sample_number }}</div>
+            <div class="col-xs-1 text-left bordergrid">
+
+                {{ final }}<br>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            Thank you for your business!<br>
+            Poochon Scientific LLC, Frederick, MD 21701  Phone 240-291-7523  Fax 301-360-3554 support@poochonscientific.com<br>
+            www.poochonscientific.com<br>
+        </div>
+
+
+        <div class="col-xs-offset-4 col-xs-4">
+            <a class="btn btn-success btn-sm hidden-print" href="{% url 'quotes:quote-update' quote.pk%}">Update</a>
+            <a class="btn btn-danger btn-sm hidden-print" href="{% url 'quotes:quote-delete' quote.pk%}">Delete</a>
+{#            <a class="btn btn-danger btn-sm hidden-print" href="{% url 'quotes:quote-delete' quote.pk%}">Delete</a>#}
         </div>
 
 
     </div>
 
+{##}
+{#    <script >//src="{% static "js/detail.js"%}"#}
+{##}
+{#        $(document).ready(function (){#}
+{#            var total = "{{ total }}";#}
+{#            var pre_tax_final = "{{ quote.pre_tax_final }}";#}
+{#            var taxRate = 0.07;#}
+{#            var $totals = $("#totals");#}
+{##}
+{#            $totals.html(total+'<br>' + pre_tax_final-total + '<br>' + (pre_tax_final-total)*taxRate + '<br>' + (pre_tax_final-total)*(1+taxRate) + '<br>');#}
+{##}
+{##}
+{#        });#}
+{#    </script>#}
 {% endblock %}

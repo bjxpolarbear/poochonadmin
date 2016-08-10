@@ -1,9 +1,9 @@
 from django import forms
 import datetime
 
-from .models import Quote, Sample
-from structure.forms import ProcedureForm as QuoteProcedureForm
-
+from .models import Quote
+from structure.models import Procedure, Service, ServicePackage
+from structure.forms import ProcedureModelMultipleChoiceField
 
 class QuoteForm(forms.ModelForm):
     quote_date = forms.DateField(widget=forms.SelectDateWidget(
@@ -14,6 +14,15 @@ class QuoteForm(forms.ModelForm):
         empty_label=("Choose Year", "Choose Month", "Choose Day")
     ), initial=(datetime.datetime.now() + datetime.timedelta(30)))
 
+    queryset = ServicePackage.objects.all()
+    service_package = forms.ModelChoiceField(queryset=queryset)
+    queryset = Service.objects.all()
+    services = forms.ModelMultipleChoiceField(queryset=queryset, widget=forms.CheckboxSelectMultiple())
+
+    # queryset = Procedure.get_tree(parent=None)
+    # procedures = ProcedureModelMultipleChoiceField(queryset=queryset, widget=forms.CheckboxSelectMultiple())
+    #
+
     class Meta:
         model = Quote
         fields = [
@@ -21,29 +30,12 @@ class QuoteForm(forms.ModelForm):
             'client',
             'quote_date',
             'expire_date',
+            'sample_number',
             'payment',
             'status',
-            'job_type'
-        ]
-
-
-class SampleForm(forms.ModelForm):
-    date_received = forms.DateField(widget=forms.SelectDateWidget(
-        empty_label=("Choose Year", "Choose Month", "Choose Day")
-    ), initial=datetime.datetime.now)
-
-    class Meta:
-        model = Sample
-        fields = [
-            'name',
-            'sample_type',
-            'organism',
-            'sample_status',
-            'date_received',
-            'location',
-            'storage',
-            'client',
-            'quote',
-            'job',
+            'service_package',
+            'services',
+            'pre_tax_final'
 
         ]
+

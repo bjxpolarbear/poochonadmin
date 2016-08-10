@@ -3,12 +3,12 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
-from django.forms.models import model_to_dict
+
 import pdb
 
-from .forms import JobCreateForm, JobProcedureForm
-from .models import Job, Procedure, JobProcedure
-# Create your views here.
+from .forms import JobForm
+from .models import Job
+
 
 class JobIndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     permission_required = 'jobs.view_job'
@@ -22,7 +22,7 @@ class JobIndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView
 
 
 class JobDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('jobs.view_job', 'jobs.view_jobprocedure')
+    permission_required = 'jobs.view_job'
     raise_exception = True
 
     template_name = 'jobs/detail.html'
@@ -35,36 +35,31 @@ class JobDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.Te
         client = job.client
         context['client'] = client
 
-        procedures = Procedure.objects.filter(jobprocedure__job_id=job_id)
+        procedures = job.procedures.all()
         context['procedures'] = procedures
 
         return context
 
 
 class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('jobs.add_job', 'jobs.add_jobprocedure')
+    permission_required = 'jobs.add_job'
     raise_exception = True
 
     template_name = 'jobs/job_form.html'
 
-    def get(self,request, **kwargs):
-        form_1 = JobCreateForm()
-        form_2 = JobProcedureForm()
-        return render(request, self.template_name, {'form_1': form_1, 'form_2': form_2})
+    def get(self, request, **kwargs):
+        form = JobForm()
 
-    def post(self,request, **kwargs):
-        form_1 = JobCreateForm(request.POST)
-        form_2 = JobProcedureForm(request.POST)
+        return render(request, self.template_name, {'form': form})
 
-        if form_1.is_valid() and form_2.is_valid():
-            new_job = form_1.save()
-            procedures_pk = request.POST.getlist('procedure')
-            procedures_pk = fill_procedure(procedures_pk)
+    def post(self, request, **kwargs):
+        form = JobForm(request.POST)
 
-            for procedure_pk in procedures_pk:
-                JobProcedure.objects.create(job=new_job, procedure=Procedure.objects.get(pk=procedure_pk))
-
-            return HttpResponseRedirect(reverse('jobs:index'))
+        if form.is_valid():
+            new_job = form.save()   # commit required since there is a many-to-many in it
+            new_job.fill_procedure()
+            new_job.save()
+            return HttpResponseRedirect(reverse('jobs:detail', kwargs={'job_id': new_job.job_id}))
 
         else:
 
@@ -72,71 +67,47 @@ class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.Te
 
 
 class JobUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('jobs.change_job', 'jobs.add_jobprocedure', 'jobs.change_jobprocedure', 'jobs.delete_jobprocedure')
+    permission_required = 'jobs.change_job'
     raise_exception = True
 
     template_name = 'jobs/job_form.html'
 
-    def get(self, request, job_id, **kwargs):
-        current_job = Job.objects.get(pk=job_id)
-        data_1 = model_to_dict(current_job)
-        data_2 = [jobprocedure.procedure.procedure_id for jobprocedure in JobProcedure.objects.filter(job_id=job_id)]
+    def get(self, request, **kwargs):
+        job_id = kwargs['job_id']
+        current_job = get_object_or_404(Job, pk=job_id)
+        form = JobForm(instance=current_job)
 
-        form_1 = JobCreateForm(initial=data_1)
-        form_2 = JobProcedureForm(initial={'procedure': data_2})
+        return render(request, self.template_name, {'form': form})
 
-        return render(request, self.template_name, {'form_1': form_1, 'form_2': form_2})
+    def post(self, request, **kwargs):
+        job_id = kwargs['job_id']
+        job = get_object_or_404(Job, job_id=job_id)
+        form = JobForm(request.POST, instance=job)
 
-    def post(self, request, job_id, **kwargs):
-        instance = get_object_or_404(Job, job_id=job_id)
-        form_1 = JobCreateForm(request.POST, instance=instance)
-        form_2 = JobProcedureForm(request.POST)
+        if form.is_valid():
+            updated_job = form.save()
+            updated_job.fill_procedure()
+            updated_job.save()
 
-        if form_1.is_valid() and form_2.is_valid():
-            form_1.save()
-            procedures_pk = request.POST.getlist('procedure')
-            procedures_pk = fill_procedure(procedures_pk)
-            procedures = Procedure.objects.filter(procedure_id__in=procedures_pk)
-
-            # load the old procedure list
-            old_procedures = Procedure.objects.filter(jobprocedure__job__job_id=job_id)
-
-            # Find the procedures in old list but not in new list
-            for_delete = set(old_procedures).difference(set(procedures))
-
-            JobProcedure.objects.filter(procedure__in=for_delete).delete()
-            # pdb.set_trace()
-            for procedure_pk in procedures_pk:
-                JobProcedure.objects.get_or_create(job=Job.objects.get(job_id=job_id),procedure=Procedure.objects.get(procedure_id=procedure_pk))
-
-
-            return HttpResponseRedirect(reverse('jobs:index'))
+            return HttpResponseRedirect(reverse('jobs:detail', kwargs={'job_id': job_id}))
 
 
 class JobDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('jobs.delete_job','jobs.delete_jobprocedure')
+    permission_required = 'jobs.delete_job'
     raise_exception = True
 
     template_name = 'jobs/job_confirm_delete.html'
     success_url = 'jobs:index'
 
-    def post(self, request, job_id, **kwargs):
-        instance = get_object_or_404(Job, job_id=job_id)
-        instance.delete()
-        job_procedures = JobProcedure.objects.filter(job__job_id=job_id)
-        for job_procedure in job_procedures:
-            job_procedure.delete()
+    def get(self, request, *args, **kwargs):
+        job_id = kwargs['job_id']
+        job = get_object_or_404(Job, job_id=job_id)
+        return render(request, self.template_name, {'object': job})
+
+    def post(self, request, **kwargs):
+        job_id = kwargs['job_id']
+        job = get_object_or_404(Job, job_id=job_id)
+        job.delete()
 
         return HttpResponseRedirect(reverse(self.success_url))
 
-
-# quick script to make a complete tree
-def fill_procedure(procedures_pk):
-    # filling the ancestors
-    for procedure_pk in procedures_pk:
-        ancestors = Procedure.objects.get(pk=procedure_pk).get_ancestors()
-        for ancestor in ancestors:
-            if str(ancestor.pk) not in procedures_pk:
-                procedures_pk.append(str(ancestor.pk))
-
-    return procedures_pk

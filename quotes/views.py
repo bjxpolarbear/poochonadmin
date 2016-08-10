@@ -3,14 +3,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views import generic
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.forms.models import model_to_dict
-
-from .models import Quote, QuoteProcedure, Sample
-from structure.models import Procedure
-from .forms import QuoteForm, SampleForm, QuoteProcedureForm
-from jobs.views import fill_procedure
 
 
+from .models import Quote
+from .forms import QuoteForm
+
+import pdb
+
+
+TAX_RATE = 0.07
 
 # Create your views here.
 class QuoteIndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
@@ -25,7 +26,7 @@ class QuoteIndexView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListVi
 
 
 class QuoteDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('quotes.view_quote', 'quotes.view_quoteprocedure')
+    permission_required = 'quotes.view_quote'
     raise_exception = True
 
     template_name = 'quotes/detail.html'
@@ -34,99 +35,77 @@ class QuoteDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.
         context = super(QuoteDetailView, self).get_context_data(**kwargs)
         quote = Quote.objects.get(pk=pk)
         context['quote'] = quote
-
+        context['quote_id'] = str(quote.id).zfill(5)
         client = quote.client
         context['client'] = client
+        context['service_package'] = quote.service_package
 
-        procedures = Procedure.objects.filter(quoteprocedure__quote_id=pk)
-        context['procedures'] = procedures
-
+        context['services'] = quote.get_services()
+        context['total'] = sum((service.price for service in context['services']))
+        context['discount'] = quote.pre_tax_final - context['total']
+        context['tax'] = quote.pre_tax_final*TAX_RATE
+        context['unit_final'] = quote.pre_tax_final*(1+TAX_RATE)
+        context['final'] = context['unit_final']*quote.sample_number
         return context
 
 
 class QuoteCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('quotes.add_quote', 'quotes.add_quoteprocedure')
+    permission_required = 'quotes.add_quote'
     raise_exception = True
 
-    template_name = 'jobs/job_form.html'
+    template_name = 'quotes/quote_form.html'
 
-    def get(self,request, **kwargs):
-        form_1 = QuoteForm()
-        form_2 = QuoteProcedureForm()
-        return render(request, self.template_name, {'form_1': form_1, 'form_2': form_2})
+    def get(self, request, **kwargs):
+        form = QuoteForm()
+
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, **kwargs):
-        form_1 = QuoteForm(request.POST)
-        form_2 = QuoteProcedureForm(request.POST)
+        form = QuoteForm(request.POST)
 
-        if form_1.is_valid() and form_2.is_valid():
-            new_quote = form_1.save()
-            procedures_pk = request.POST.getlist('procedure')
-            procedures_pk = fill_procedure(procedures_pk)
-
-            for procedure_pk in procedures_pk:
-                QuoteProcedure.objects.create(quote=new_quote, procedure=Procedure.objects.get(pk=procedure_pk))
-
-            return HttpResponseRedirect(reverse('quotes:index'))
+        if form.is_valid():
+            new_quote = form.save()
+            return HttpResponseRedirect(reverse('quotes:detail', kwargs={'pk': new_quote.pk}))
 
         else:
-
+            # raise ValidationError({'field_name': ["error message",]})
             return HttpResponseRedirect(reverse('quotes:quote-create'))
 
+
 class QuoteUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('quotes.change_quote', 'quotes.add_quoteprocedure', 'quotes.change_quoteprocedure', 'quotes.delete_quoteprocedure')
+    permission_required = 'quotes.change_quote'
     raise_exception = True
 
-    template_name = 'jobs/job_form.html'
+    template_name = 'quotes/quote_form.html'
 
-    def get(self, request, pk, **kwargs):
-        instance = Quote.objects.get(pk=pk)
-        data_1 = model_to_dict(instance)
-        data_2 = [quoteprocedure.procedure.procedure_id for quoteprocedure in QuoteProcedure.objects.filter(quote=instance)]
+    def get(self, request, **kwargs):
+        pk = kwargs['pk']
+        quote = get_object_or_404(Quote, pk=pk)
+        form = QuoteForm(instance=quote)
 
-        form_1 = QuoteForm(initial=data_1)
-        form_2 = QuoteProcedureForm(initial={'procedure': data_2})
+        return render(request, self.template_name, {'form': form})
 
-        return render(request, self.template_name, {'form_1': form_1, 'form_2': form_2})
+    def post(self, request, **kwargs):
+        pk = kwargs['pk']
+        quote = get_object_or_404(Quote, pk=pk)
+        form = QuoteForm(request.POST, instance=quote)
 
-    def post(self, request, pk, **kwargs):
-        instance = get_object_or_404(Quote, pk=pk)
-        form_1 = QuoteForm(request.POST, instance=instance)
-        form_2 = QuoteProcedureForm(request.POST)
+        if form.is_valid():
+            form.save()
 
-        if form_1.is_valid() and form_2.is_valid():
-            form_1.save()
-            procedures_pk = request.POST.getlist('procedure')
-            procedures_pk = fill_procedure(procedures_pk)
-            procedures = Procedure.objects.filter(procedure_id__in=procedures_pk)
-
-            # load the old procedure list
-            old_procedures = Procedure.objects.filter(quoteprocedure__quote_id=pk)
-
-            # Find the procedures in old list but not in new list
-            for_delete = set(old_procedures).difference(set(procedures))
-
-            QuoteProcedure.objects.filter(procedure__in=for_delete).delete()
-            # pdb.set_trace()
-            for procedure_pk in procedures_pk:
-                QuoteProcedure.objects.get_or_create(quote=Quote.objects.get(pk=pk),procedure=Procedure.objects.get(procedure_id=procedure_pk))
-
-
-            return HttpResponseRedirect(reverse('jobs:index'))
+            return HttpResponseRedirect(reverse('quotes:detail', kwargs={'pk': pk}))
 
 
 class QuoteDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
-    permission_required = ('quotes.delete_quote', 'quotes.delete_quoteprocedure')
+    permission_required = 'quotes.delete_quote'
     raise_exception = True
 
     template_name = 'jobs/job_confirm_delete.html'
     success_url = 'quotes:index'
 
-    def post(self, request, pk, **kwargs):
-        instance = get_object_or_404(Quote, pk=pk)
-        instance.delete()
-        job_procedures = QuoteProcedure.objects.filter(quote_id=pk)
-        for job_procedure in job_procedures:
-            job_procedure.delete()
+    def post(self, request, **kwargs):
+        pk = kwargs['pk']
+        quote = get_object_or_404(Quote, pk=pk)
+        quote.delete()
 
         return HttpResponseRedirect(reverse(self.success_url))
