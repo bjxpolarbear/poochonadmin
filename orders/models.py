@@ -38,7 +38,7 @@ class Order(models.Model):
 
     pre_tax_final = models.FloatField(db_column='Pre_Tax_Final')
 
-    quote = models.ForeignKey(Quote, blank=True, null=True)
+    quote = models.ForeignKey(Quote, on_delete=models.PROTECT, null=True)
     objects = OrderManager()
 
     class Meta:

@@ -116,10 +116,10 @@
         </div>
 
 
-        <div class="col-xs-offset-4 col-xs-4">
+        <div class="col-xs-offset-4 col-xs-4 text-center">
             <a class="btn btn-success btn-sm hidden-print" href="{% url 'orders:order-update' order.pk%}">Update</a>
             <a class="btn btn-warning btn-sm hidden-print" href="{% url 'orders:order-convert' order.pk%}">Convert To Job</a>
-            <a class="btn btn-danger btn-sm hidden-print" href="{% url 'quotes:quote-delete' order.pk%}">Delete</a>
+            <a class="btn btn-danger btn-sm hidden-print" href="{% url 'orders:order-delete' order.pk%}">Delete</a>
         </div>
 
 
