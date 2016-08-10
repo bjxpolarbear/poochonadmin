@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect
 
 from .models import Quote
 from .forms import QuoteForm
-
+from orders.models import Order
+from structure.models import OrderStatus
 import pdb
 
 
@@ -40,7 +41,7 @@ class QuoteDetailView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.
         context['client'] = client
         context['service_package'] = quote.service_package
 
-        context['services'] = quote.get_services()
+        context['services'] = quote.services.all()
         context['total'] = sum((service.price for service in context['services']))
         context['discount'] = quote.pre_tax_final - context['total']
         context['tax'] = quote.pre_tax_final*TAX_RATE
@@ -62,9 +63,11 @@ class QuoteCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.
 
     def post(self, request, **kwargs):
         form = QuoteForm(request.POST)
-
+        pdb.set_trace()
         if form.is_valid():
-            new_quote = form.save()
+            new_quote = form.save(commit=False)
+            new_quote.save()
+            form.save_m2m()
             return HttpResponseRedirect(reverse('quotes:detail', kwargs={'pk': new_quote.pk}))
 
         else:
@@ -109,3 +112,32 @@ class QuoteDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.
         quote.delete()
 
         return HttpResponseRedirect(reverse(self.success_url))
+
+
+class ConvertToOrderView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.TemplateView):
+    permission_required = ('quotes.view_quote', 'orders.add_order')
+    raise_exception = True
+
+    def get(self, request, **kwargs):
+        pk = kwargs['pk']
+        quote = get_object_or_404(Quote, pk=pk)
+        # pdb.set_trace()
+        order = Order.objects.create(
+
+
+            name = quote.name,
+            client = quote.client,
+            order_date = quote.quote_date,
+            payment = quote.payment,
+            status = OrderStatus.objects.get(pk = 1),
+            service_package = quote.service_package,
+            sample_number = quote.sample_number,
+            pre_tax_final = quote.pre_tax_final,
+            quote = quote,
+            # services = quote.services,
+
+        )
+        # for service in quote.services
+        order.services.add(*quote.services.all())
+
+        return  HttpResponseRedirect(reverse('orders:detail', kwargs={'pk': order.pk}))

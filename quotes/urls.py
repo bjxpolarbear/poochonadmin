@@ -18,5 +18,8 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/update/$', views.QuoteUpdateView.as_view(), name='quote-update'),
 
     # /quotes/<quote_id>/delete/
-    url(r'^(?P<pk>[0-9]+)/delete/$', views.QuoteDeleteView.as_view(), name='quote-delete')
+    url(r'^(?P<pk>[0-9]+)/delete/$', views.QuoteDeleteView.as_view(), name='quote-delete'),
+
+    # /quotes/<quote_id>/convert/
+    url(r'^(?P<pk>[0-9]+)/convert/$', views.ConvertToOrderView.as_view(), name='quote-convert')
 ]

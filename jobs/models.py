@@ -2,9 +2,23 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 from clients.models import Client
-from quotes.models import Quote
+from orders.models import Order
 from structure.models import JobStatus, Procedure, SampleType, SampleStatus, Organism
 
+class JobManager(models.Manager):
+    def create_book(self, **kwargs):
+
+        order = self.create(
+
+            job_name=kwargs['job_name'],
+            client=kwargs['client'],
+            date_submitted=kwargs['date_submitted'],
+            job_status=kwargs['job_status'],
+            order=kwargs['order'],
+
+        )
+        # do something with the book
+        return order
 
 class Job(models.Model):
 
@@ -13,12 +27,13 @@ class Job(models.Model):
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
     date_submitted = models.DateField(db_column='Date_Submitted', blank=True, null=True)
     date_completed = models.DateField(db_column='Date_Completed', blank=True, null=True)
-    # job_type = models.ForeignKey(JobType, db_column='Job_Type', on_delete=models.PROTECT)
+
     job_status = models.ForeignKey(JobStatus, db_column='Job_Status', on_delete=models.PROTECT)
-    quote = models.ForeignKey(Quote, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
 
     procedures = models.ManyToManyField(Procedure)
 
+    objects = JobManager()
 
     class Meta:
         permissions = (
@@ -55,7 +70,7 @@ class Sample(models.Model):
     location = models.CharField(db_column='Location', max_length=255)
     storage = models.CharField(db_column='Storage', max_length=255, blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)#, related_name='sample_client')
-    quote = models.ForeignKey(Quote, on_delete=models.PROTECT, blank=True, null=True)#, related_name='sample_quote')
+    order = models.ForeignKey(Order, on_delete=models.PROTECT, blank=True, null=True)#, related_name='sample_quote')
     job = models.ForeignKey(Job, on_delete=models.PROTECT, blank=True, null=True, related_name='sample_job')
 
     class Meta:

@@ -20,7 +20,7 @@ class JobForm(forms.ModelForm):
         model = Job
         fields = [
             'job_name',
-            'quote',
+            'order',
             'client',
             'date_submitted',
             'date_completed',
@@ -47,6 +47,6 @@ class SampleForm(forms.ModelForm):
             'location',
             'storage',
             'client',
-            'quote',
+            'order',
             'job',
         ]

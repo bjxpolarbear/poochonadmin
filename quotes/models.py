@@ -1,8 +1,7 @@
 from django.db import models
-
 from clients.models import Client
-# from jobs.models import
 from structure.models import Service, ServicePackage, PaymentTerm, QuoteStatus, Procedure
+
 
 class Quote(models.Model):
 
@@ -26,7 +25,7 @@ class Quote(models.Model):
         )
 
     def __str__(self):
-        return self.client + ': ' + self.name
+        return self.client.__str__() + ': ' + self.name
 
     def get_services(self):
         services = []

@@ -1,6 +1,6 @@
 {%  extends 'base.html' %}
 {% load staticfiles %}
-{% block title %}Quote Detail{% endblock %}
+{% block title %}Order Detail{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
@@ -10,7 +10,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <h3 class="text-center">Service Quotation</h3>
+            <h3 class="text-center">Service Order</h3>
         </div>
 
 
@@ -28,10 +28,10 @@
             </div>
             <div class="col-xs-5 col-xs-offset-2">
                 <ul class="list-unstyled" style="padding-top: 30px">
-                    <li>Quote No.: {{ quote_id }}</li>
-                    <li>Date: {{ quote.quote_date }}</li>
-                    <li>Expire Date: {{ quote.expire_date }}</li>
-                    <li>Payment Term: {{ quote.payment }}</li>
+                    <li>Order No.: {{ id }}</li>
+                    <li>Date: {{ order.order_date }}</li>
+{#                    <li>Expire Date: {{ order.expire_date }}</li>#}
+                    <li>Payment Term: {{ order.payment }}</li>
                 </ul>
             </div>
         </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="row">
             <div class="col-xs-2 text-right">Quote Name: </div>
-            <div class="col-xs-9 text-left bordergrid">{{ quote.name }}</div>
+            <div class="col-xs-9 text-left bordergrid">{{ order.name }}</div>
         </div>
         <div class="row">
             <div class="col-xs-2 text-right">Service Package: </div>
@@ -93,7 +93,7 @@
             <div class="col-xs-1 text-right bordergrid" id="totals">
                 {{ total|floatformat:2 }}<br>
                 {{ discount|floatformat:2 }}<br>
-                {{ quote.pre_tax_final|floatformat:2 }}<br>
+                {{ order.pre_tax_final|floatformat:2 }}<br>
                 {{ unit_final|floatformat:2 }}<br>
             </div>
         </div>
@@ -102,7 +102,7 @@
             <div class="col-xs-6 text-right bordergrid">
                 Sample Number:<br>
             </div>
-            <div class="col-xs-2 text-right bordergrid">{{ quote.sample_number }}</div>
+            <div class="col-xs-2 text-right bordergrid">{{ order.sample_number }}</div>
             <div class="col-xs-1 text-right bordergrid">
 
                 {{ final|floatformat:2 }}<br>
@@ -116,10 +116,10 @@
         </div>
 
 
-        <div class="col-xs-offset-4 col-xs-4 text-center">
-            <a class="btn btn-success btn-sm hidden-print" href="{% url 'quotes:quote-update' quote.pk%}">Update</a>
-            <a class="btn btn-warning btn-sm hidden-print" href="{% url 'quotes:quote-convert' quote.pk%}">Convert To Order</a>
-            <a class="btn btn-danger btn-sm hidden-print" href="{% url 'quotes:quote-delete' quote.pk%}">Delete</a>
+        <div class="col-xs-offset-4 col-xs-4">
+            <a class="btn btn-success btn-sm hidden-print" href="{% url 'orders:order-update' order.pk%}">Update</a>
+            <a class="btn btn-warning btn-sm hidden-print" href="{% url 'orders:order-convert' order.pk%}">Convert To Job</a>
+            <a class="btn btn-danger btn-sm hidden-print" href="{% url 'quotes:quote-delete' order.pk%}">Delete</a>
         </div>
 
 
