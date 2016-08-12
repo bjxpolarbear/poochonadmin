@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 import pdb
 
-from .forms import JobForm
+from .forms import JobForm, SampleForm
 from .models import Job
 
 
@@ -49,8 +49,8 @@ class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.Te
 
     def get(self, request, **kwargs):
         form = JobForm()
-
-        return render(request, self.template_name, {'form': form})
+        sample_form = SampleForm()
+        return render(request, self.template_name, {'form': form, 'sample_form': sample_form})
 
     def post(self, request, **kwargs):
         form = JobForm(request.POST)

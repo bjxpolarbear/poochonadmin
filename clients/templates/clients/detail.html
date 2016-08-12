@@ -4,49 +4,56 @@
 
 {% block body %}
     <div class="container-fluid">
-        <div class="panel panel-default " >
-            <div class="panel-heading"><h3>{{ client.first_name }} {{ client.last_name }}<div class="panel-title pull-right">{{ client.customer_id }}</div></h3></div>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>Email: </strong>{{ client.email }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Company: </strong>{{ client.company }}
-                </li>
-                {% if client.address %}
-                <li class="list-group-item">
-                    <strong>Addr: </strong>{{ client.address }}
-                </li>
-                {% endif %}
-                {% if client.work_phone %}
-                <li class="list-group-item">
-                    <strong>Work phone: </strong>{{ client.work_phone }}
-                </li>
-                {% endif %}
-                {% if client.cell_phone %}
-                <li class="list-group-item">
-                    <strong>Cell phone: </strong>{{ client.cell_phone }}
-                </li>
-                {% endif %}
-                {% if client.alt_phone %}
-                <li class="list-group-item">
-                    <strong>Alt phone: </strong>{{ client.alt_phone }}
-                </li>
-                {% endif %}
-                {% if client.city %}
-                <li class="list-group-item">
-                    <strong>City: </strong>{{ client.city }}
-                </li>
-                {% endif %}
-                {% if client.country %}
-                <li class="list-group-item">
-                    <strong>Country: </strong>{{ client.country }}
-                </li>
-                {% endif %}
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="panel panel-default " >
+                <div class="panel-heading"><h3>{{ client.first_name }} {{ client.last_name }}<div class="panel-title pull-right">{{ client.customer_id }}</div></h3></div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Email: </strong>{{ client.email }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Company: </strong>{{ client.company }}
+                        </li>
+                        {% if client.address %}
+                        <li class="list-group-item">
+                            <strong>Addr: </strong>{{ client.address }}
+                        </li>
+                        {% endif %}
+                        {% if client.work_phone %}
+                        <li class="list-group-item">
+                            <strong>Work phone: </strong>{{ client.work_phone }}
+                        </li>
+                        {% endif %}
+                        {% if client.cell_phone %}
+                        <li class="list-group-item">
+                            <strong>Cell phone: </strong>{{ client.cell_phone }}
+                        </li>
+                        {% endif %}
+                        {% if client.alt_phone %}
+                        <li class="list-group-item">
+                            <strong>Alt phone: </strong>{{ client.alt_phone }}
+                        </li>
+                        {% endif %}
+                        {% if client.city %}
+                        <li class="list-group-item">
+                            <strong>City: </strong>{{ client.city }}
+                        </li>
+                        {% endif %}
+                        {% if client.country %}
+                        <li class="list-group-item">
+                            <strong>Country: </strong>{{ client.country }}
+                        </li>
+                        {% endif %}
 
-            </ul>
+                    </ul>
+                </div>
+            </div>
+        <div class="col-xs-8 col-xs-offset-2 text-center">
+            <a class="btn btn-success btn-sm" href="{% url 'clients:client-update' client.pk%}">Update</a>
+            <a class="btn btn-warning btn-sm" href="{% url 'clients:client-create-quote' client.pk%}">Create A Quote</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'clients:client-delete' client.pk%}">Delete</a>
         </div>
-        <a class="btn btn-danger btn-sm" href="{% url 'clients:client-delete' client.pk%}">Delete</a>
+
     </div>
 
 

@@ -3,10 +3,10 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django_tables2 import SingleTableMixin
+from django.core.urlresolvers import reverse
 
 from .models import Client
-from .tables import ClientTable
+# from .tables import ClientTable
 # Create your views here.
 
 import pdb
@@ -75,7 +75,7 @@ class ClientUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         'email',
         'address',
         'zip',
-        'poochon_rep'
+        'poochon_rep',
     ]
 
 
@@ -85,3 +85,14 @@ class ClientDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
     model = Client
     success_url = reverse_lazy('clients:index')
+
+
+class ClientCreateQuoteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = ('clients.view_client', 'quotes.add_quote')
+    raise_exception = True
+
+    def get(self, request, **kwargs):
+
+        client_pk = kwargs['pk']
+        url = reverse('quotes:quote-create', kwargs={'pk': client_pk})
+        return HttpResponseRedirect(url)

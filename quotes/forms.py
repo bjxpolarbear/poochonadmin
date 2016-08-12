@@ -21,7 +21,6 @@ class QuoteForm(forms.ModelForm):
 
     # queryset = Procedure.get_tree(parent=None)
     # procedures = ProcedureModelMultipleChoiceField(queryset=queryset, widget=forms.CheckboxSelectMultiple())
-    #
 
     class Meta:
         model = Quote
@@ -35,7 +34,7 @@ class QuoteForm(forms.ModelForm):
             'status',
             'service_package',
             'services',
-            'pre_tax_final'
+            'pre_tax_final',
 
         ]
 

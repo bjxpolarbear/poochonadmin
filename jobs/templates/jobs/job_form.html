@@ -8,26 +8,66 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-sm-12 col-md-7">
-            <div class="panel panel-default">
-                <div class="panel-body">
-
-                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+        <div class="col-sm-12 col-md-8 col-md-offset-2">
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+
                         <table class="table table-condensed  table-hover">
                         {{ form.as_table }}
-{#                        {{ form_2.as_table }}#}
-                        </table>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
 
-                        </div>
-                    </form>
+
+
+                    </div>
+                </div>
+
+{#                <div class="panel panel-default">#}
+{#                    <div class="panel-body">#}
+{##}
+{##}
+{#                            <table class="table table-condensed  table-hover">#}
+{#                                <tr>#}
+{#                                    <th>name</th>#}
+{#                                    <th>Type</th>#}
+{#                                    <th>Organism</th>#}
+{#                                    <th>Sample status</th>#}
+{#                                    <th>Date Recieved</th>#}
+{#                                    <th>Location</th>#}
+{#                                    <th>Storage</th>#}
+{#                                    <th>client</th>#}
+{#                                    <th>job</th>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td>{{ sample_form.name }}</td>#}
+{#                                    <td>{{ sample_form.sample_type }}</td>#}
+{#                                    <td>{{ sample_form.organism }}</td>#}
+{#                                    <td>{{ sample_form.sample_status }}</td>#}
+{#                                    <td>{{ sample_form.date_received }}</td>#}
+{#                                    <td>{{ sample_form.location }}</td>#}
+{#                                    <td>{{ sample_form.storage }}</td>#}
+{#                                    <td>{{ sample_form.client }}</td>#}
+{##}
+{#                                </tr>#}
+{##}
+    {#                            {{ sample_form }}#}
+                            </table>
+{##}
+{##}
+{##}
+{##}
+{#                    </div>#}
+{#                </div>#}
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
 
                 </div>
-            </div>
+
+            </form>
         </div>
     </div>
 </div>

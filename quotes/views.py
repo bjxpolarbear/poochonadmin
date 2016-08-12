@@ -58,6 +58,11 @@ class QuoteCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.base.
 
     def get(self, request, **kwargs):
         form = QuoteForm()
+        try:
+            pk = kwargs['pk']
+            form = QuoteForm(initial={'client': pk})
+        except:
+            pass
 
         return render(request, self.template_name, {'form': form})
 

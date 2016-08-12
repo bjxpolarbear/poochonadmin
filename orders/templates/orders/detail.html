@@ -60,7 +60,7 @@
             <div class="col-xs-1 test-left bordergrid">{{ client.zip }}</div>
         </div>
         <div class="row">
-            <div class="col-xs-2 text-right">Quote Name: </div>
+            <div class="col-xs-2 text-right">Order Name: </div>
             <div class="col-xs-9 text-left bordergrid">{{ order.name }}</div>
         </div>
         <div class="row">
@@ -93,7 +93,7 @@
             <div class="col-xs-1 text-right bordergrid" id="totals">
                 {{ total|floatformat:2 }}<br>
                 {{ discount|floatformat:2 }}<br>
-                {{ order.pre_tax_final|floatformat:2 }}<br>
+                {{ order.tax|floatformat:2 }}<br>
                 {{ unit_final|floatformat:2 }}<br>
             </div>
         </div>

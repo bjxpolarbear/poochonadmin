@@ -13,6 +13,7 @@ urlpatterns = [
 
     # /quotes/create
     url(r'^create/$', views.QuoteCreateView.as_view(), name='quote-create'),
+    url(r'^create/(?P<pk>[0-9]+)$', views.QuoteCreateView.as_view(), name='quote-create'),
 
     # /quotes/<quote_id>/update
     url(r'^(?P<pk>[0-9]+)/update/$', views.QuoteUpdateView.as_view(), name='quote-update'),

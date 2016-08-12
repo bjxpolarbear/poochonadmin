@@ -47,6 +47,9 @@ class SampleForm(forms.ModelForm):
             'location',
             'storage',
             'client',
-            'order',
-            'job',
+            # 'order',
+            # 'job',
         ]
+
+
+SampleFormSet = forms.formset_factory(SampleForm)

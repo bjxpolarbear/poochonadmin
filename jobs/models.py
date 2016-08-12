@@ -62,6 +62,7 @@ class Sample(models.Model):
 
     name = models.CharField(db_column='Name', max_length=255)
     description = models.TextField(db_column='Description', blank=True, null=True)
+
     sample_type = models.ForeignKey(SampleType, on_delete=models.PROTECT)
     organism = models.ForeignKey(Organism, on_delete=models.PROTECT)
 
@@ -70,7 +71,7 @@ class Sample(models.Model):
     location = models.CharField(db_column='Location', max_length=255)
     storage = models.CharField(db_column='Storage', max_length=255, blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)#, related_name='sample_client')
-    order = models.ForeignKey(Order, on_delete=models.PROTECT, blank=True, null=True)#, related_name='sample_quote')
+    # order = models.ForeignKey(Order, on_delete=models.PROTECT, blank=True, null=True)#, related_name='sample_quote')
     job = models.ForeignKey(Job, on_delete=models.PROTECT, blank=True, null=True, related_name='sample_job')
 
     class Meta:
